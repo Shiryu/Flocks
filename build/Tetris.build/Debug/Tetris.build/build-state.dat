@@ -1,0 +1,312 @@
+TTetris
+v7
+r0
+t315060141.363571
+cCheck dependencies
+cProcessInfoPlistFile /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist Info.plist
+cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o /Users/Feysal/Tetris/main.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o /Users/Feysal/Tetris/board.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o /Users/Feysal/Tetris/piece.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/game.o /Users/Feysal/Tetris/game.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+cLd /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris normal i386
+cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework /Library/Frameworks/sfml-system.framework
+cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework /Library/Frameworks/sfml-window.framework
+cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework /Library/Frameworks/sfml-graphics.framework
+cTouch /Users/Feysal/Tetris/build/Debug/Tetris.app
+
+N/Library/Frameworks/sfml-graphics.framework
+c000000004D091FCE00000000000000CC
+t1292443598
+s204
+
+N/Library/Frameworks/sfml-graphics.framework/sfml-graphics
+c000000004BBA050600000000004FCC40
+t1270482182
+s5229632
+
+N/Library/Frameworks/sfml-system.framework
+c000000004D091FC200000000000000CC
+t1292443586
+s204
+
+N/Library/Frameworks/sfml-system.framework/sfml-system
+c000000004BBA050700000000001C45D8
+t1270482183
+s1852888
+
+N/Library/Frameworks/sfml-window.framework
+c000000004D091FC700000000000000CC
+t1292443591
+s204
+
+N/Library/Frameworks/sfml-window.framework/sfml-window
+c000000004BBA050700000000001FC530
+t1270482183
+s2082096
+
+N/System/Library/Frameworks/SFML.framework/Headers/Graphics.hpp
+c000000004BBA050700000000000006DA
+t1270482183
+s1754
+
+N/System/Library/Frameworks/SFML.framework/Headers/System.hpp
+c000000004BBA0507000000000000069F
+t1270482183
+s1695
+
+N/System/Library/Frameworks/SFML.framework/Headers/Window.hpp
+c000000004BBA0507000000000000069A
+t1270482183
+s1690
+
+N/Users/Feysal/Tetris/board.cpp
+c000000004D168CE20000000000001881
+t1293323490
+s6273
+i"board.h"
+
+N/Users/Feysal/Tetris/board.h
+c000000004D168CEC00000000000006A6
+t1293323500
+s1702
+i<SFML/Window.hpp>
+i<SFML/Graphics.hpp>
+i"piece.h"
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app
+t1293364041
+s102
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework
+t1292741471
+s170
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework
+t1293117132
+s170
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework
+t1292741471
+s170
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist
+t1292741471
+s602
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris
+t1293364041
+s100336
+
+N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/PkgInfo
+t1292741471
+s8
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/Tetris.LinkFileList
+c000000004D0FA2EA000000000000015A
+t1292870378
+s346
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o
+t1293355880
+s68264
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/flood.o
+t2
+s0
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/game.o
+t1293364041
+s373056
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o
+t1293358428
+s109096
+
+N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o
+t1293355880
+s8532
+
+N/Users/Feysal/Tetris/ff.h
+c000000004D0E9EB50000000000000578
+t1292803765
+s1400
+i"piece.h"
+i"board.h"
+
+N/Users/Feysal/Tetris/flood.cpp
+c000000004D0E9BD60000000000000087
+t1292803030
+s135
+
+N/Users/Feysal/Tetris/game.cpp
+c000000004D172B480000000000001E44
+t1293364040
+s7748
+i<iostream>
+i<fstream>
+i"game.h"
+
+N/Users/Feysal/Tetris/game.h
+c000000004D17518300000000000005C2
+t1293373827
+s1474
+i<SFML/System.hpp>
+i<SFML/Window.hpp>
+i<SFML/Graphics.hpp>
+i<string>
+i<sstream>
+i"board.h"
+
+N/Users/Feysal/Tetris/main.cpp
+c000000004D170B6500000000000001E3
+t1293355877
+s483
+i<SFML/Window.hpp>
+i<SFML/Graphics.hpp>
+i"game.h"
+
+N/Users/Feysal/Tetris/piece.cpp
+c000000004D132EBF00000000000002A6
+t1293102783
+s678
+i"piece.h"
+
+N/Users/Feysal/Tetris/piece.h
+c000000004D168CFD000000000000022D
+t1293323517
+s557
+i"shapes.h"
+
+N/Users/Feysal/Tetris/shapes.h
+c000000004D1545ED00000000000012CC
+t1293239789
+s4812
+
+N/Users/Feysal/Tetris/types.h
+c000000004D0FF28100000000000012CA
+t1292890753
+s4810
+
+N/usr/include/string.h
+c000000004B738B7F0000000000001731
+t1265863551
+s5937
+
+NInfo.plist
+c000000004D0D3B95000000000000027A
+t1292712853
+s634
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies315060141#315060141#0(0"0(0#1#0"8605479424#0"0#
+
+CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o /Users/Feysal/Tetris/board.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+s315048680.039968
+e315048680.880351
+r1
+xCompileC
+xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o
+x/Users/Feysal/Tetris/board.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@38"Compile /Users/Feysal/Tetris/board.cpp315048680#315048680#0(0"0(0#0#30"/Users/Feysal/Tetris/board.cpp8602078016#972"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/board.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o0#
+
+CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/flood.o /Users/Feysal/Tetris/flood.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/game.o /Users/Feysal/Tetris/game.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+s315056841.426699
+e315056841.427858
+r1
+xCompileC
+xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/game.o
+x/Users/Feysal/Tetris/game.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Compile /Users/Feysal/Tetris/game.cpp315056841#315056841#0(0"0(0#0#29"/Users/Feysal/Tetris/game.cpp8603236448#970"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/game.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/game.o0#
+
+CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o /Users/Feysal/Tetris/main.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+s315051225.937120
+e315051228.331486
+r1
+xCompileC
+xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o
+x/Users/Feysal/Tetris/main.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@37"Compile /Users/Feysal/Tetris/main.cpp315051225#315051228#0(0"0(0#0#29"/Users/Feysal/Tetris/main.cpp8603412096#970"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/main.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o0#
+
+CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o /Users/Feysal/Tetris/piece.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+s315048680.062758
+e315048680.174847
+r1
+xCompileC
+xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o
+x/Users/Feysal/Tetris/piece.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@38"Compile /Users/Feysal/Tetris/piece.cpp315048680#315048680#0(0"0(0#0#30"/Users/Feysal/Tetris/piece.cpp8602514208#972"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/piece.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o0#
+
+CLd /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris normal i386
+s315056841.427923
+e315056841.461423
+r1
+xLd
+x/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris
+xnormal
+xi386
+lSLF07#2@70"Link /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris315056841#315056841#0(0"0(0#0#0"8602667712#389"    cd /Users/Feysal/Tetris    /Developer/usr/bin/g++-4.2 -arch i386 -L/Users/Feysal/Tetris/build/Debug -F/Users/Feysal/Tetris/build/Debug -filelist /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/Tetris.LinkFileList -framework sfml-graphics -framework sfml-system -framework sfml-window -o /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris0#
+
+CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework /Library/Frameworks/sfml-graphics.framework
+s314434271.813448
+e314434272.783068
+r1
+xPBXCp
+xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework
+x/Library/Frameworks/sfml-graphics.framework
+lSLF07#2@48"Copy /Library/Frameworks/sfml-graphics.framework314434271#314434273#0(0"0(0#0#43"/Library/Frameworks/sfml-graphics.framework8611785536#284"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-graphics.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
+
+CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework /Library/Frameworks/sfml-system.framework
+s314809932.034675
+e314809932.340606
+r1
+xPBXCp
+xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework
+x/Library/Frameworks/sfml-system.framework
+lSLF07#2@46"Copy /Library/Frameworks/sfml-system.framework314809932#314809932#0(0"0(0#0#41"/Library/Frameworks/sfml-system.framework8615908224#282"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-system.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
+
+CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework /Library/Frameworks/sfml-window.framework
+s314434271.812650
+e314434272.269424
+r1
+xPBXCp
+xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework
+x/Library/Frameworks/sfml-window.framework
+lSLF07#2@46"Copy /Library/Frameworks/sfml-window.framework314434271#314434272#0(0"0(0#0#41"/Library/Frameworks/sfml-window.framework30118312141586552#282"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-window.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
+
+CProcessInfoPlistFile /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist Info.plist
+s314434271.680197
+e314434271.732561
+r1
+xProcessInfoPlistFile
+x/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist314434271#314434271#0(0"0(0#0#31"/Users/Feysal/Tetris/Info.plist32932993185022068#246"    cd /Users/Feysal/Tetris    builtin-infoPlistUtility Info.plist -genpkginfo /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist0#
+
+CTouch /Users/Feysal/Tetris/build/Debug/Tetris.app
+s315056841.461753
+e315056841.464893
+r1
+xTouch
+x/Users/Feysal/Tetris/build/Debug/Tetris.app
+lSLF07#2@49"Touch /Users/Feysal/Tetris/build/Debug/Tetris.app315056841#315056841#0(0"0(0#0#0"8604877696#94"    cd /Users/Feysal/Tetris    /usr/bin/touch -c /Users/Feysal/Tetris/build/Debug/Tetris.app0#
+

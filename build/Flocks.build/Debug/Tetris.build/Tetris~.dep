@@ -1,0 +1,11 @@
+ee2aee3a61a56756bf5a6da3c4a9e30c 67c06b584b33495c5d780cd3cccb5ae9 ffffffffffffffffffffffffffffffff 102 /Users/Feysal/Flocks/build/Debug/Tetris.app
+af2bede461b88221b114fecc130fd72a 37626a66b6b7d4510dd150fb4e2f09a8 ffffffffffffffffffffffffffffffff 100336 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/MacOS/Tetris
+0000000006af39bf0000000000000b5e 237a6ba18a67fe56511e5ce057794a5c ffffffffffffffffffffffffffffffff 373056 /Users/Feysal/Flocks/build/Flocks.build/Debug/Tetris.build/Objects-normal/i386/game.o
+000000004d10e7af0000000000001247 e52822ad9ff2a85be8f7699b7081dd6f ffffffffffffffffffffffffffffffff 8532 /Users/Feysal/Flocks/build/Flocks.build/Debug/Tetris.build/Objects-normal/i386/piece.o
+000000000003c91e0000000000000e86 3d9252128d1a5a8600749bfa2c892023 ffffffffffffffffffffffffffffffff 68264 /Users/Feysal/Flocks/build/Flocks.build/Debug/Tetris.build/Objects-normal/i386/board.o
+0000000006af40e200000000000014b9 54ebf6faff9edc400889504d18322fb4 ffffffffffffffffffffffffffffffff 109092 /Users/Feysal/Flocks/build/Flocks.build/Debug/Tetris.build/Objects-normal/i386/main.o
+ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff 170 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework
+ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff 170 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework
+ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff 170 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework
+ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff 8 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/PkgInfo
+ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff ffffffffffffffffffffffffffffffff 602 /Users/Feysal/Flocks/build/Debug/Tetris.app/Contents/Info.plist
