@@ -269,6 +269,25 @@ void Game::dropNewPiece()
 	}
 }
 
+void Game::handlePauseInput()
+{
+	sf::Event event;
+	
+	while(renderArea->GetEvent(event))
+	{
+		if(event.Type == sf::Event::KeyPressed)
+		{
+			if(event.Key.Code == sf::Key::P)
+			{
+				if(getState() == PAUSED)
+					setState(RUNNING);
+				else
+					setState(PAUSED);
+			}
+		}
+	}
+}
+
 void Game::handleUserInput(sf::Clock &gameClock)
 {
 	sf::Event event;
@@ -386,6 +405,8 @@ void Game::render()
 		}
 	}
 	
+	showNextPiece();
+	showHoldPiece();
 	showScore();
 	showLevel();
 	showLinesCompleted();
@@ -412,12 +433,10 @@ void Game::play()
 
 	while(renderArea->IsOpened())
 	{
-		handleUserInput(gameClock);
+		//handleUserInput(gameClock);
 		
 		if(getState() == PAUSED)
-		{
-	
-		}
+			handlePauseInput();
 		else
 		{
 			
@@ -439,8 +458,6 @@ void Game::play()
 		}
 		
 		render();
-		showNextPiece();
-		showHoldPiece();
 		
 		renderArea->Display();
 	}
