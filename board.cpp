@@ -103,31 +103,11 @@ void Board::clearPiece(BPiece p)
 	floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, FREE);
 }
 
-void Board::setCurrentPiece(BPiece p)
-{
-	currentPiece = p;
-}
-
-BPiece Board::getCurrentPiece()
-{
-	return currentPiece;
-}
-
-void Board::setCurrentGhostPiece(BPiece p)
-{
-	ghostPiece = p;
-}
-
-BPiece Board::getCurrentGhostPiece()
-{
-	return ghostPiece;
-}
-
 void Board::newPiece(BPiece p)
 {
-	if(p.willOverflowBoard())
+	/*if(p.willOverflowBoard())
 		p.setPosX(ORIGIN_X + 1);
-	else
+	else*/
 		p.setPosX(ORIGIN_X);
 	
 	p.setPosY(ORIGIN_Y);
@@ -270,19 +250,22 @@ void Board::rotateCurrentPieceRight()
 
 void Board::drawGhostPiece()
 {
-	BPiece ghost = getCurrentPiece();
-	int x = currentPiece.getPosX();
-	int y = currentPiece.getPosY();
+	if(!isCurrentPieceFallen())
+	{
+		BPiece ghost = getCurrentPiece();
+		int x = currentPiece.getPosX();
+		int y = currentPiece.getPosY();
 	
-	while(isCurrentPieceMovable(++x, y));
+		while(isCurrentPieceMovable(++x, y));
 	
-	ghost.setPosX(x - 1);
-	ghost.setPosY(y);
-	ghost.setColor(GHOST);
+		ghost.setPosX(x - 1);
+		ghost.setPosY(y);
+		ghost.setColor(GHOST);
 	
-	setCurrentGhostPiece(ghost);
+		setCurrentGhostPiece(ghost);
 	
-	floodFill(ghost.getPosX(), ghost.getPosY(), PIVOT_X, PIVOT_Y, ghost.getKind(), ghost.getOrientation(), GHOST);
+		floodFill(ghost.getPosX(), ghost.getPosY(), PIVOT_X, PIVOT_Y, ghost.getKind(), ghost.getOrientation(), GHOST);
+	}
 }
 
 void Board::moveGhostPiece()
@@ -340,8 +323,8 @@ bool Board::isCurrentPieceFallen()
 	int y = currentPiece.getPosY();
 	
 	if(isCurrentPieceMovable(x + 1, y))
-		return false;
-	
+	   return false;
+	   
 	return true;
 }
 

@@ -10,7 +10,7 @@ int main()
 	//sf::RenderWindow *renderArea = new sf::RenderWindow(sf::VideoMode(BLOCK_SIZE * BOARD_WIDTH, BLOCK_SIZE * BOARD_HEIGHT), "Tetris");
 	
 	sf::RenderWindow *renderArea = new sf::RenderWindow(sf::VideoMode(BLOCK_SIZE * 30, BLOCK_SIZE * 25), "Flocks");
-	renderArea->SetFramerateLimit(50);
+	renderArea->SetFramerateLimit(60);
 	
 	Game g(renderArea);
 

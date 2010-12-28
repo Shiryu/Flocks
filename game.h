@@ -20,7 +20,11 @@ const int BLOCK_SIZE = 20;
 
 const std::string BLOCK_FILE = "/Users/Feysal/Flocks/images/block.png";
 const std::string BG_FILE = "/Users/Feysal/Flocks/images/interface.png";
+const std::string PAUSE_FILE = "/Users/Feysal/Flocks/images/pause.png";
+
 const std::string DIGITAL_POLICE = "/Users/Feysal/Flocks/fonts/digital_7/digital-7(italic).ttf";
+
+const float WAIT_TIME = 0.1;
 
 class Game
 {
@@ -61,8 +65,10 @@ public:
 	void setHoldPiece(BPiece p) { holdPiece = p; }
 	BPiece getHoldPiece() { return holdPiece; }
 	
-	void setState(int s) { score = s; }
+	void setState(int s) { state = s; }
 	int getState() { return state; }
+	
+	void pause() { setState(PAUSED); }
 	
 	void setLinesCompleted(int l) { linesCompleted = l; }
 	int getLinesCompleted() { return linesCompleted; }
@@ -90,6 +96,7 @@ public:
 	void updateGameInfos(int nbLinesDeleted);
 	
 	void setBackground();
+	void loadImage(const std::string fileName);
 	
 	void showScore();
 	void showLevel();
@@ -98,6 +105,10 @@ public:
 	
 	void showNextPiece();
 	void showHoldPiece();
+	
+	void dropNewPiece();
+	
+	void handleUserInput(sf::Clock &gameClock);
 	
 	void render();
 	

@@ -1,5 +1,8 @@
 // !!!:Feysal:20101221 
 // !!!:Feysal:20101226
+/* A FIXER : Quand on n'utilise pas un HARD DROP pour faire tomber la pièce, elle est respawnée 1 ligne en dessous de la ligne de
+ * spawn normale
+ */
 #include <iostream>
 #include <fstream>
 #include "game.h"
@@ -53,9 +56,9 @@ int Game::computeScore(int nbLinesDeleted)
 BPiece Game::createNewPiece()
 {
 	int kind = sf::Randomizer::Random(0, NB_KINDS - 1);
-	int orientation = sf::Randomizer::Random(0, NB_ROTATIONS - 1);
+	//int orientation = sf::Randomizer::Random(0, NB_ROTATIONS - 1);
 	
-	BPiece b(Piece(kind, orientation));
+	BPiece b(Piece(kind, 0));
 
 	return b;
 }
@@ -96,12 +99,26 @@ void Game::holdCurrentPiece()
 		firstTimeHolding = false;
 	}
 }
-	
+
 void Game::setBackground()
 {
 	sf::Image image;
 	
 	if(image.LoadFromFile(BG_FILE))
+	{
+		sf::Sprite sprite;
+		sprite.SetImage(image);
+		
+		sprite.SetPosition(0.0, 0.0);
+		renderArea->Draw(sprite);
+	}
+}
+
+void Game::loadImage(const std::string fileName)
+{
+	sf::Image image;
+	
+	if(image.LoadFromFile(fileName))
 	{
 		sf::Sprite sprite;
 		sprite.SetImage(image);
@@ -144,6 +161,7 @@ void Game::showLevel()
 		sf::String currentLevel;
 		currentLevel.SetFont(font);
 		currentLevel.SetText("Niveau : " + str);
+		//currentLevel.SetText("Level : " + str);
 		currentLevel.SetSize(11);
 		currentLevel.SetColor(sf::Color::Black);
 		currentLevel.SetPosition(430, 215);
@@ -164,6 +182,7 @@ void Game::showLinesCompleted()
 		sf::String currentLinesCompleted;
 		currentLinesCompleted.SetFont(myriad);
 		currentLinesCompleted.SetText("Lignes : " + str);
+		//currentLinesCompleted.SetText("Lines : " + str);
 		currentLinesCompleted.SetSize(11);
 		currentLinesCompleted.SetColor(sf::Color::Black);
 		currentLinesCompleted.SetPosition(430, 230);
@@ -236,12 +255,88 @@ void Game::showHoldPiece()
 		showPiece(getHoldPiece(), 40, 70.25);
 }
 	
+void Game::dropNewPiece()
+{
+	if(!gameArea.isGameOver())
+	{
+		setCurrentGamePiece(getNextPiece());
+		enableCurrentPiece();
+		setNextPiece(createNewPiece());
+	
+		int n = gameArea.deletePossibleLines();
+	
+		updateGameInfos(n);
+	}
+}
+
+void Game::handleUserInput(sf::Clock &gameClock)
+{
+	sf::Event event;
+		
+	while(renderArea->GetEvent(event))
+	{
+		if(event.Type == sf::Event::Closed)
+			renderArea->Close();
+		
+		if(event.Type == sf::Event::KeyPressed)
+		{
+			gameClock.Reset();
+				
+			if(event.Key.Shift)
+				holdCurrentPiece();
+			
+			if(event.Key.Code == sf::Key::Left)
+				gameArea.moveCurrentPieceLeft();
+								
+			if(event.Key.Code == sf::Key::Right)
+				gameArea.moveCurrentPieceRight();
+				
+			if(event.Key.Code == sf::Key::Up)
+				gameArea.rotateCurrentPieceRight();
+			
+			if(event.Key.Code == sf::Key::Space)
+			{
+				gameArea.dropCurrentPiece();
+				dropNewPiece();
+			}
+			
+			if(event.Key.Code == sf::Key::P)
+			{
+				if(getState() == PAUSED)
+					setState(RUNNING);
+				else
+					setState(PAUSED);
+			}
+		}
+	}
+	
+	const sf::Input &input = renderArea->GetInput();
+	
+	if(input.IsKeyDown(sf::Key::Down))
+	{
+		//gameArea.moveCurrentPieceDown();
+		
+		if(gameArea.isCurrentPieceFallen())
+		{
+			if(gameClock.GetElapsedTime() >= WAIT_TIME)
+				dropNewPiece();
+		}
+		
+		gameArea.moveCurrentPieceDown();
+		
+		gameClock.Reset();
+	}
+}
+					
 void Game::render()
 {
 	renderArea->Clear(sf::Color(175, 175, 175));
 	sf::Image blockImage;
 
 	setBackground();
+	
+	if(getState() == PAUSED)
+		loadImage(PAUSE_FILE);
 	
 	if(blockImage.LoadFromFile(BLOCK_FILE))
 	{
@@ -304,88 +399,44 @@ void Game::play()
 	enableCurrentPiece();
 	
 	setLinesCompleted(0);
-	setLevel(0);
+	setLevel(1);
 	setFallIterationDelay(computeFallIterationDelay());
 	setScore(0);
+	setState(RUNNING);
 	
-	sf::Clock clock;
-	clock.Reset();
+	sf::Clock fallingClock, gameClock;
+	fallingClock.Reset();
+	gameClock.Reset();
 	
 	float currentTime = 0, precTime = 0;
 
 	while(renderArea->IsOpened())
 	{
-		sf::Event event;
+		handleUserInput(gameClock);
 		
-		currentTime = clock.GetElapsedTime();
-		
-		if(currentTime - precTime >= getFallIterationDelay())
+		if(getState() == PAUSED)
 		{
-			gameArea.moveCurrentPieceDown();
-			precTime = currentTime;
+	
+		}
+		else
+		{
 			
-			if(gameArea.isCurrentPieceFallen())
-			{
-				if(gameArea.isGameOver())
-					fout << "GAME OVER" << endl;
-				
-				setCurrentGamePiece(getNextPiece());
-				enableCurrentPiece();
-				setNextPiece(createNewPiece());
-				
-				int n = gameArea.deletePossibleLines();
-				
-				updateGameInfos(n);
-			}
-		}
+			currentTime = fallingClock.GetElapsedTime();
 		
-		while(renderArea->GetEvent(event))
-		{
-			if(event.Type == sf::Event::Closed)
-				renderArea->Close();
-
-			if(event.Type == sf::Event::KeyPressed)
+			if(currentTime - precTime >= getFallIterationDelay())
 			{
-				if(event.Key.Code == sf::Key::Left)
-					gameArea.moveCurrentPieceLeft();
-				
-				if(event.Key.Code == sf::Key::Right)
-					gameArea.moveCurrentPieceRight();
-
-				if(event.Key.Code == sf::Key::Up)
-					gameArea.rotateCurrentPieceLeft();
-
-				if(event.Key.Code == sf::Key::Down)
-					gameArea.rotateCurrentPieceRight();
-				
-				if(event.Key.Code == sf::Key::H)
-					holdCurrentPiece();
-				
-				if(event.Key.Code == sf::Key::Space)
+				if(gameArea.isCurrentPieceFallen())
 				{
-					if(gameArea.isGameOver())
-						fout << "GAME OVER" << endl;
-					
-					gameArea.dropCurrentPiece();
-					
-					setCurrentGamePiece(getNextPiece());
-					enableCurrentPiece();
-					setNextPiece(createNewPiece());
-					
-					int n = gameArea.deletePossibleLines();
-					
-					updateGameInfos(n);
+					if(gameClock.GetElapsedTime() >= WAIT_TIME)
+						dropNewPiece();
 				}
+			
+				gameArea.moveCurrentPieceDown();
+				precTime = currentTime;
 			}
+		
+			handleUserInput(gameClock);
 		}
-		
-		/*const sf::Input &input = renderArea->GetInput();
-		
-		if(input.IsKeyDown(sf::Key::Left))
-			gameArea.moveCurrentPieceLeft();
-		
-		if(input.IsKeyDown(sf::Key::Right))
-			gameArea.moveCurrentPieceRight();*/
 		
 		render();
 		showNextPiece();

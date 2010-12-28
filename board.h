@@ -54,11 +54,11 @@ public:
 	
 	Board();
 	
-	void setCurrentPiece(BPiece p);
-	BPiece getCurrentPiece();
+	void setCurrentPiece(BPiece p) { currentPiece = p; }
+	BPiece getCurrentPiece() {return currentPiece; }
 	
-	void setCurrentGhostPiece(BPiece p);
-	BPiece getCurrentGhostPiece();
+	void setCurrentGhostPiece(BPiece p) { ghostPiece = p; }
+	BPiece getCurrentGhostPiece() { return ghostPiece; }
 	
 	void drawPiece(BPiece p);
 	void clearPiece(BPiece p);
