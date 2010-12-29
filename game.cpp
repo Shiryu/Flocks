@@ -1,8 +1,3 @@
-// !!!:Feysal:20101221 
-// !!!:Feysal:20101226
-/* A FIXER : Quand on n'utilise pas un HARD DROP pour faire tomber la pièce, elle est respawnée 1 ligne en dessous de la ligne de
- * spawn normale
- */
 #include <iostream>
 #include <fstream>
 #include "game.h"
@@ -254,21 +249,103 @@ void Game::showHoldPiece()
 	if(!firstTimeHolding)
 		showPiece(getHoldPiece(), 40, 70.25);
 }
-	
-void Game::dropNewPiece()
+
+void Game::handleTimerInput(float currentTime, float &precTime)
 {
-	if(!gameArea.isGameOver())
+	if(currentTime - precTime >= getFallIterationDelay())
 	{
-		setCurrentGamePiece(getNextPiece());
-		enableCurrentPiece();
-		setNextPiece(createNewPiece());
-	
-		int n = gameArea.deletePossibleLines();
-	
-		updateGameInfos(n);
+		if(!gameArea.isCurrentPieceFallen())
+			gameArea.moveCurrentPieceDown();
+		else
+		{
+			gameArea.moveCurrentPieceDown();
+			
+			setCurrentGamePiece(getNextPiece());
+			enableCurrentPiece();
+			setNextPiece(createNewPiece());
+			
+			int n = gameArea.deletePossibleLines();
+			updateGameInfos(n);
+						
+			
+		}
+				
+		precTime = currentTime;
 	}
 }
 
+void Game::handleUserInput()
+{
+	sf::Event event;
+		
+	while(renderArea->GetEvent(event))
+	{
+		if(event.Type == sf::Event::Closed)
+			renderArea->Close();
+		
+		if(event.Type == sf::Event::KeyPressed)
+		{
+			if(event.Key.Shift)
+				holdCurrentPiece();
+			
+			if(event.Key.Code == sf::Key::Left)
+				gameArea.moveCurrentPieceLeft();
+								
+			if(event.Key.Code == sf::Key::Right)
+				gameArea.moveCurrentPieceRight();
+				
+			if(event.Key.Code == sf::Key::Up)
+				gameArea.rotateCurrentPieceRight();
+			
+			if(event.Key.Code == sf::Key::Space)
+			{
+				gameArea.dropCurrentPiece();	
+				
+				if(gameArea.isCurrentPieceFallen())
+				{
+					gameArea.moveCurrentPieceDown();
+					
+					setCurrentGamePiece(getNextPiece());
+					enableCurrentPiece();
+					setNextPiece(createNewPiece());
+					
+					int n = gameArea.deletePossibleLines();
+					updateGameInfos(n);
+				}
+			}
+			
+			if(event.Key.Code == sf::Key::P)
+			{
+				if(getState() == PAUSED)
+					setState(RUNNING);
+				else
+					setState(PAUSED);
+			}
+		}
+	}
+	
+	const sf::Input &input = renderArea->GetInput();
+	
+	if(input.IsKeyDown(sf::Key::Down))
+	{
+		gameArea.moveCurrentPieceDown();
+	
+		if(gameArea.isCurrentPieceFallen())
+		{
+			gameArea.moveCurrentPieceDown();
+	
+			setCurrentGamePiece(getNextPiece());
+			enableCurrentPiece();
+			setNextPiece(createNewPiece());
+			
+			int n = gameArea.deletePossibleLines();
+			updateGameInfos(n);
+		}
+	}
+		
+
+}
+	
 void Game::handlePauseInput()
 {
 	sf::Event event;
@@ -288,65 +365,6 @@ void Game::handlePauseInput()
 	}
 }
 
-void Game::handleUserInput(sf::Clock &gameClock)
-{
-	sf::Event event;
-		
-	while(renderArea->GetEvent(event))
-	{
-		if(event.Type == sf::Event::Closed)
-			renderArea->Close();
-		
-		if(event.Type == sf::Event::KeyPressed)
-		{
-			gameClock.Reset();
-				
-			if(event.Key.Shift)
-				holdCurrentPiece();
-			
-			if(event.Key.Code == sf::Key::Left)
-				gameArea.moveCurrentPieceLeft();
-								
-			if(event.Key.Code == sf::Key::Right)
-				gameArea.moveCurrentPieceRight();
-				
-			if(event.Key.Code == sf::Key::Up)
-				gameArea.rotateCurrentPieceRight();
-			
-			if(event.Key.Code == sf::Key::Space)
-			{
-				gameArea.dropCurrentPiece();
-				dropNewPiece();
-			}
-			
-			if(event.Key.Code == sf::Key::P)
-			{
-				if(getState() == PAUSED)
-					setState(RUNNING);
-				else
-					setState(PAUSED);
-			}
-		}
-	}
-	
-	const sf::Input &input = renderArea->GetInput();
-	
-	if(input.IsKeyDown(sf::Key::Down))
-	{
-		//gameArea.moveCurrentPieceDown();
-		
-		if(gameArea.isCurrentPieceFallen())
-		{
-			if(gameClock.GetElapsedTime() >= WAIT_TIME)
-				dropNewPiece();
-		}
-		
-		gameArea.moveCurrentPieceDown();
-		
-		gameClock.Reset();
-	}
-}
-					
 void Game::render()
 {
 	renderArea->Clear(sf::Color(175, 175, 175));
@@ -425,36 +443,23 @@ void Game::play()
 	setScore(0);
 	setState(RUNNING);
 	
-	sf::Clock fallingClock, gameClock;
+	sf::Clock fallingClock;
 	fallingClock.Reset();
-	gameClock.Reset();
 	
 	float currentTime = 0, precTime = 0;
 
 	while(renderArea->IsOpened())
 	{
-		//handleUserInput(gameClock);
-		
+	
 		if(getState() == PAUSED)
 			handlePauseInput();
 		else
 		{
-			
 			currentTime = fallingClock.GetElapsedTime();
 		
-			if(currentTime - precTime >= getFallIterationDelay())
-			{
-				if(gameArea.isCurrentPieceFallen())
-				{
-					if(gameClock.GetElapsedTime() >= WAIT_TIME)
-						dropNewPiece();
-				}
-			
-				gameArea.moveCurrentPieceDown();
-				precTime = currentTime;
-			}
+			handleTimerInput(currentTime, precTime);
 		
-			handleUserInput(gameClock);
+			handleUserInput();
 		}
 		
 		render();
