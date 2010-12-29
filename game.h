@@ -106,9 +106,9 @@ public:
 	void showNextPiece();
 	void showHoldPiece();
 	
-	void dropNewPiece();
-	
-	void handleUserInput(sf::Clock &gameClock);
+	void handleTimerInput(float currentTime, float &precTime);
+	void handleUserInput();
+	void handlePauseInput();
 	
 	void render();
 	
