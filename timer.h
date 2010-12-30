@@ -35,6 +35,7 @@ private:
 		}
 	}
 		
+public:
 	std::string toString(int n)
 	{
 		std::string result;
@@ -47,8 +48,8 @@ private:
 		
 		return result;
 	}
+
 	
-public:
 	void start()
 	{
 		if(state != STARTED)
