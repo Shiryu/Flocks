@@ -4,18 +4,20 @@
 #include "game.h"
 #include "timer.h"
 
-const std::string SPRINT_BG_IMAGE = "/Users/Feysal/Flocks/images/sprint_bg.png";
+const std::string ULTRA_BG_IMAGE = "/Users/Feysal/Flocks/images/ultra.png";
 
-class Sprint : public Game
+class Ultra : public Game
 {
 private:
 	Timer timer;
 	bool gameOver;
 	
 public:
-	Sprint(sf::RenderWindow *renderArea) : Game(renderArea) { gameOver = false; timer.reset(); }
+	Ultra(sf::RenderWindow *renderArea) : Game(renderArea) { gameOver = false; timer.reset(); }
 	
 	void handleGameOverInput();
+	
+	void showInfos();
 	
 	void render();
 	void play();

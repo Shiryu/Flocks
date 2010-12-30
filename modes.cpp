@@ -1,13 +1,38 @@
 #include "modes.h"
 
-void Sprint::render()
+void Ultra::showInfos()
 {
-	Game::render(SPRINT_BG_IMAGE);
+	showNextPiece();
+	showHoldPiece();
+	//showScore();
+	//showLevel();
+	
+	int n = getLinesCompleted();
+	std::string str = timer.toString(n);
+	
+	sf::Font digital;
+	
+	if(digital.LoadFromFile(DIGITAL_FONT))
+	{
+		sf::String currentLinesCompleted;
+		currentLinesCompleted.SetFont(digital);
+		currentLinesCompleted.SetText(str);
+		currentLinesCompleted.SetSize(40);
+		currentLinesCompleted.SetColor(sf::Color::Black);
+		currentLinesCompleted.SetPosition(500.0, 240.0);
+		
+		renderArea->Draw(currentLinesCompleted);
+	}
+}
 
+void Ultra::render()
+{
+	Game::render(ULTRA_BG_IMAGE);
+	showInfos();
 	timer.showTime(renderArea, 50.0, 225.0);
 }
 
-void Sprint::play()
+void Ultra::play()
 {
 	renderArea->Clear(sf::Color(245, 245, 200));
 	
