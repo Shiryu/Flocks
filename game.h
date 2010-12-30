@@ -17,6 +17,8 @@ enum
 	PAUSED = 1
 };
 
+const int N = NB_KINDS * 2;
+
 const int BLOCK_SIZE = 20;
 
 const std::string BLOCK_FILE = "/Users/Feysal/Flocks/images/block.png";
@@ -33,8 +35,6 @@ protected:
 	
 private:
 	Board gameArea;
-	
-	
 	BPiece currentGamePiece, nextPiece, holdPiece;
 	
 	int state;
@@ -54,10 +54,16 @@ private:
 		return result.str();
 	}
 	
+	int distribution[N];
+	int currentPieceIndex;
+	
+	void initDistribution();
+	void shuffle();
+	
 public:
-	Game() { firstTimeHolding = true; }
-	Game(sf::RenderWindow *r) { firstTimeHolding = true; renderArea = r; }
-	~Game() { delete renderArea; }
+	Game();
+	Game(sf::RenderWindow *r);
+	~Game();
 	
 	void setCurrentGamePiece(BPiece p) { currentGamePiece = p; }
 	BPiece getCurrentGamePiece() { return currentGamePiece; }
@@ -108,6 +114,8 @@ public:
 	
 	void showNextPiece();
 	void showHoldPiece();
+	
+	virtual void showInfos();
 	
 	void handlePieceLandAction();
 	void handleTimerInput(float currentTime, float &precTime);

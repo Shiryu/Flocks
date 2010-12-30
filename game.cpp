@@ -6,6 +6,49 @@ using namespace std;
 
 ofstream fout("output.txt");
 
+void Game::initDistribution()
+{
+	currentPieceIndex = 0;
+	
+	for(int i = 0; i < NB_KINDS; ++i)
+		distribution[i] = i;
+	
+	for(int i = NB_KINDS; i < N; ++i)
+		distribution[i] = i - NB_KINDS; 
+}
+
+void Game::shuffle()
+{
+	for(int i = 0; i < N; ++i)
+	{
+		int j = sf::Randomizer::Random(0, N - 1);
+		
+		int temp = distribution[i];
+		distribution[i] = distribution[j];
+		distribution[j] = temp;
+	}
+}
+
+Game::Game()
+{
+	firstTimeHolding = true;
+	initDistribution();
+	shuffle();
+}
+
+Game::Game(sf::RenderWindow *r)
+{
+	firstTimeHolding = true;
+	initDistribution();
+	shuffle();
+	renderArea = r;
+}
+
+Game::~Game()
+{
+	delete renderArea;
+}
+
 int Game::computeLevel()
 {
 	int n = getLinesCompleted();
@@ -48,13 +91,28 @@ int Game::computeScore(int nbLinesDeleted)
 	return score;
 }
 
-BPiece Game::createNewPiece()
+/*BPiece Game::createNewPiece()
 {
 	int kind = sf::Randomizer::Random(0, NB_KINDS - 1);
 	//int orientation = sf::Randomizer::Random(0, NB_ROTATIONS - 1);
 	
 	BPiece b(Piece(kind, 0));
 
+	return b;
+}*/
+
+BPiece Game::createNewPiece()
+{
+	if(currentPieceIndex == N - 1)
+	{
+		currentPieceIndex = 0;
+		shuffle();
+	}
+	
+	int kind = distribution[currentPieceIndex++];
+	
+	BPiece b(Piece(kind, 0));
+	
 	return b;
 }
 
@@ -250,6 +308,15 @@ void Game::showHoldPiece()
 		showPiece(getHoldPiece(), 40, 70.25);
 }
 
+void Game::showInfos()
+{
+	showNextPiece();
+	showHoldPiece();
+	showScore();
+	showLevel();
+	showLinesCompleted();
+}
+
 void Game::handlePieceLandAction()
 {
 	if(!gameArea.isGameOver())
@@ -411,11 +478,7 @@ void Game::render(const std::string backgroundImage)
 		}
 	}
 	
-	showNextPiece();
-	showHoldPiece();
-	showScore();
-	showLevel();
-	showLinesCompleted();
+	showInfos();
 }
 
 void Game::play()
