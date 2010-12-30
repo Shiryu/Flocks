@@ -7,6 +7,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 #include "board.h"
 #include "timer.h"

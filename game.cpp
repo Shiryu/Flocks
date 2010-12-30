@@ -19,14 +19,7 @@ void Game::initDistribution()
 
 void Game::shuffle()
 {
-	for(int i = 0; i < N; ++i)
-	{
-		int j = sf::Randomizer::Random(0, N - 1);
-		
-		int temp = distribution[i];
-		distribution[i] = distribution[j];
-		distribution[j] = temp;
-	}
+	std::random_shuffle(distribution, distribution + N);
 }
 
 Game::Game()
