@@ -95,11 +95,11 @@ void Game::holdCurrentPiece()
 	}
 }
 
-void Game::setBackground()
+void Game::setBackground(const std::string backgroundImage)
 {
 	sf::Image image;
 	
-	if(image.LoadFromFile(BG_FILE))
+	if(image.LoadFromFile(backgroundImage))
 	{
 		sf::Sprite sprite;
 		sprite.SetImage(image);
@@ -250,6 +250,21 @@ void Game::showHoldPiece()
 		showPiece(getHoldPiece(), 40, 70.25);
 }
 
+void Game::handlePieceLandAction()
+{
+	if(!gameArea.isGameOver())
+	{
+		gameArea.moveCurrentPieceDown();
+		
+		setCurrentGamePiece(getNextPiece());
+		enableCurrentPiece();
+		setNextPiece(createNewPiece());
+		
+		int n = gameArea.deletePossibleLines();
+		updateGameInfos(n);
+	}
+}
+
 void Game::handleTimerInput(float currentTime, float &precTime)
 {
 	if(currentTime - precTime >= getFallIterationDelay())
@@ -257,18 +272,7 @@ void Game::handleTimerInput(float currentTime, float &precTime)
 		if(!gameArea.isCurrentPieceFallen())
 			gameArea.moveCurrentPieceDown();
 		else
-		{
-			gameArea.moveCurrentPieceDown();
-			
-			setCurrentGamePiece(getNextPiece());
-			enableCurrentPiece();
-			setNextPiece(createNewPiece());
-			
-			int n = gameArea.deletePossibleLines();
-			updateGameInfos(n);
-						
-			
-		}
+			handlePieceLandAction();
 				
 		precTime = currentTime;
 	}
@@ -302,16 +306,7 @@ void Game::handleUserInput()
 				gameArea.dropCurrentPiece();	
 				
 				if(gameArea.isCurrentPieceFallen())
-				{
-					gameArea.moveCurrentPieceDown();
-					
-					setCurrentGamePiece(getNextPiece());
-					enableCurrentPiece();
-					setNextPiece(createNewPiece());
-					
-					int n = gameArea.deletePossibleLines();
-					updateGameInfos(n);
-				}
+					handlePieceLandAction();
 			}
 			
 			if(event.Key.Code == sf::Key::P)
@@ -331,16 +326,7 @@ void Game::handleUserInput()
 		gameArea.moveCurrentPieceDown();
 	
 		if(gameArea.isCurrentPieceFallen())
-		{
-			gameArea.moveCurrentPieceDown();
-	
-			setCurrentGamePiece(getNextPiece());
-			enableCurrentPiece();
-			setNextPiece(createNewPiece());
-			
-			int n = gameArea.deletePossibleLines();
-			updateGameInfos(n);
-		}
+			handlePieceLandAction();
 	}
 		
 
@@ -365,12 +351,14 @@ void Game::handlePauseInput()
 	}
 }
 
-void Game::render()
+void Game::render(const std::string backgroundImage)
 {
-	renderArea->Clear(sf::Color(175, 175, 175));
+	//renderArea->Clear(sf::Color(175, 175, 175));
+	renderArea->Clear(sf::Color(245, 245, 200));
+	
 	sf::Image blockImage;
 
-	setBackground();
+	setBackground(backgroundImage);
 	
 	if(getState() == PAUSED)
 		loadImage(PAUSE_FILE);
@@ -432,6 +420,8 @@ void Game::render()
 
 void Game::play()
 {
+	renderArea->Clear(sf::Color(245, 245, 200));
+	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
 	
@@ -450,7 +440,6 @@ void Game::play()
 
 	while(renderArea->IsOpened())
 	{
-	
 		if(getState() == PAUSED)
 			handlePauseInput();
 		else
@@ -462,7 +451,7 @@ void Game::play()
 			handleUserInput();
 		}
 		
-		render();
+		render(BG_FILE);
 		
 		renderArea->Display();
 	}

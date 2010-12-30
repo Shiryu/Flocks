@@ -1,14 +1,15 @@
-// !!!:Feysal:20101221 
 #ifndef GAME_H
 #define GAME_H
 
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <sstream>
 
 #include "board.h"
+#include "timer.h"
 
 enum 
 {
@@ -24,13 +25,15 @@ const std::string PAUSE_FILE = "/Users/Feysal/Flocks/images/pause.png";
 
 const std::string DIGITAL_POLICE = "/Users/Feysal/Flocks/fonts/digital_7/digital-7(italic).ttf";
 
-const float WAIT_TIME = 0.1;
-
 class Game
 {
+	
+protected:
+	sf::RenderWindow *renderArea;
+	
 private:
 	Board gameArea;
-	sf::RenderWindow *renderArea;
+	
 	
 	BPiece currentGamePiece, nextPiece, holdPiece;
 	
@@ -95,7 +98,7 @@ public:
 	
 	void updateGameInfos(int nbLinesDeleted);
 	
-	void setBackground();
+	void setBackground(const std::string backgroundImage);
 	void loadImage(const std::string fileName);
 	
 	void showScore();
@@ -106,13 +109,14 @@ public:
 	void showNextPiece();
 	void showHoldPiece();
 	
+	void handlePieceLandAction();
 	void handleTimerInput(float currentTime, float &precTime);
 	void handleUserInput();
 	void handlePauseInput();
 	
-	void render();
+	virtual void render(const std::string backgroundImage);
 	
-	void play();
+	virtual void play();
 	
 };
 

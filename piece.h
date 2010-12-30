@@ -1,6 +1,3 @@
-// !!!:Feysal:20101220 
-// !!!:Feysal:20101221 
-// !!!:Feysal:20101226 
 #ifndef PIECE_H
 #define PIECE_H
 
@@ -30,20 +27,29 @@ private:
 	int color;
 	
 public:
-	Piece();
-	Piece(int k, int o);
-	Piece(const Piece &);
+	Piece() { }
+	Piece(int k, int o) { kind = k; orientation = o; }
+	Piece(const Piece &p) { kind = p.kind; orientation = p.orientation; color = p.color; }
 	
-	void setKind(int k);
-	void setOrientation(int o);
+	void setKind(int k) { kind = k; }
+	void setOrientation(int o) { orientation = o; }
 	
-	int getKind();
-	int getOrientation();
+	int getKind() { return kind; }
+	int getOrientation() { return orientation; }
 	
-	void setColor(int c);
-	int getColor();
+	void setColor(int c) { color = c; }
+	int getColor() { return color; }
 	
-	bool willOverflowBoard();
+	bool willOverflowBoard()
+	{
+		for(int j = 0; j < SIZE; ++j)
+		{
+			if(PIECES[kind][orientation][0][j] == 1)
+				return true;
+		}
+		
+		return false;
+	}
 };
 
 #endif
