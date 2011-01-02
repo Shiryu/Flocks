@@ -7,7 +7,7 @@
 #include <sstream>
 #include <string>
 
-const std::string DIGITAL_FONT = "/Users/Feysal/Flocks/fonts/digital_7/digital-7.ttf";
+const std::string DIGITALI_FONT = "fonts/digital_7/digital-7(italic).ttf";
 
 class Timer
 {
@@ -18,6 +18,8 @@ private:
 	sf::Clock clock;
 	int state;
 	float elapsedTime;
+	
+	sf::Font digital;
 	
 	void reverse(std::string &str)
 	{
@@ -34,8 +36,18 @@ private:
 			j--;
 		}
 	}
+	
+	void loadFont()
+	{
+		digital.LoadFromFile(DIGITALI_FONT);
+	}
 		
 public:
+	Timer() 
+	{
+		loadFont();
+	}
+	
 	std::string toString(int n)
 	{
 		std::string result;
@@ -128,19 +140,14 @@ public:
 		
 	void showTime(sf::RenderWindow *renderArea, float x, float y)
 	{
-		sf::Font digital;
-		
-		if(digital.LoadFromFile(DIGITAL_FONT))
-		{
-			sf::String time;
-			time.SetText(format());
-			time.SetFont(digital);
-			time.SetSize(40);
-			time.SetColor(sf::Color::Black);
-			time.SetPosition(x, y);
+		sf::String time;
+		time.SetText(format());
+		time.SetFont(digital);
+		time.SetSize(40);
+		time.SetColor(sf::Color::Black);
+		time.SetPosition(x, y);
 			
-			renderArea->Draw(time);
-		}
+		renderArea->Draw(time);
 	}
 	
 };
