@@ -1,6 +1,3 @@
-// !!!:Feysal:20101220 
-// !!!:Feysal:20101221 
-// !!!:Feysal:20101226 
 #include "board.h"
 
 void Board::flood(int i, int j, int px, int py, int k, int o, int value, bool visited[][SIZE])
@@ -296,7 +293,7 @@ int Board::deletePossibleLines()
 	{
 		int i = 0;
 		
-		for(; i < BOARD_WIDTH && area[i][j] != FREE; ++i);
+		for(; i < BOARD_WIDTH && (area[i][j] != FREE && area[i][j] != GHOST); ++i);
 		
 		if(i == BOARD_WIDTH)
 		{
@@ -337,4 +334,13 @@ bool Board::isGameOver()
 	}
 	
 	return false;
+}
+
+void Board::clear()
+{
+	for(int i = 0; i < BOARD_WIDTH; ++i)
+	{
+		for(int j = 0; j < BOARD_HEIGHT; ++j)
+			area[i][j] = FREE;
+	}
 }

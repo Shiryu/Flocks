@@ -10,7 +10,6 @@
 #include <algorithm>
 
 #include "board.h"
-#include "timer.h"
 
 enum 
 {
@@ -22,17 +21,31 @@ const int N = NB_KINDS * 2;
 
 const int BLOCK_SIZE = 20;
 
-const std::string BLOCK_FILE = "/Users/Feysal/Flocks/images/block.png";
-const std::string BG_FILE = "/Users/Feysal/Flocks/images/interface.png";
-const std::string PAUSE_FILE = "/Users/Feysal/Flocks/images/pause.png";
-
-const std::string DIGITAL_POLICE = "/Users/Feysal/Flocks/fonts/digital_7/digital-7(italic).ttf";
+const std::string BLOCK_IMG = "images/block.png";
+const std::string BG_IMG = "images/interface.png";
+const std::string PAUSE_IMG = "images/pause.png";
+const std::string GAME_OVER_IMG = "images/gameover.png";
+const std::string DIGITAL_FONT = "fonts/digital_7/digital-7(italic).ttf";
+const std::string VADOR_FONT = "fonts/vador.ttf";
+const std::string MYRIAD_FONT = "/Library/Fonts/MyriadPro-Regular.otf";
+const std::string MARATHON_DATA_FILE = "data/marathon.flk";
 
 class Game
 {
 	
 protected:
 	sf::RenderWindow *renderArea;
+	sf::Image blockImage, bgImage, gameOverImage;
+	sf::Font vador, digital, myriad;
+	
+	std::string toString(int n)
+	{
+		std::ostringstream result;
+		
+		result << n;
+		
+		return result.str();
+	}
 	
 private:
 	Board gameArea;
@@ -46,22 +59,15 @@ private:
 	
 	bool firstTimeHolding;
 	
-	std::string toString(int n)
-	{
-		std::ostringstream result;
-		
-		result << n;
-		
-		return result.str();
-	}
-	
-	int distribution[N];
+	int randomBag[N];
 	int currentPieceIndex;
 	
-	void initDistribution();
-	void shuffle();
+	void initRandomBag();
+	void shuffleRandomBag();
 	
 public:
+	virtual void loadRessources();
+	
 	Game();
 	Game(sf::RenderWindow *r);
 	~Game();
@@ -106,22 +112,28 @@ public:
 	void updateGameInfos(int nbLinesDeleted);
 	
 	void setBackground(const std::string backgroundImage);
-	void loadImage(const std::string fileName);
 	
 	void showScore();
 	void showLevel();
 	void showLinesCompleted();
 	void showPiece(BPiece p, int x, int y);
 	
+	virtual void recordBestScore();
+	virtual void showBestScore();
+	
 	void showNextPiece();
 	void showHoldPiece();
 	
 	virtual void showInfos();
 	
+	virtual void restart();
+	virtual bool gameOver();
+	
 	void handlePieceLandAction();
 	void handleTimerInput(float currentTime, float &precTime);
 	void handleUserInput();
-	void handlePauseInput();
+	virtual void handlePauseInput();
+	virtual void handleGameOverInput();
 	
 	virtual void render(const std::string backgroundImage);
 	

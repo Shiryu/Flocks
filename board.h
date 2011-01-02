@@ -1,6 +1,3 @@
-// !!!:Feysal:20101220 
-// !!!:Feysal:20101221 
-// !!!:Feysal:20101226 
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -85,6 +82,8 @@ public:
 	bool isCurrentPieceFallen();
 	
 	bool isGameOver();
+	
+	void clear();
 };
 
 #endif
