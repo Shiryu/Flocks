@@ -65,6 +65,8 @@ void Ultra::showBestScore()
 
 void Ultra::handlePauseInput()
 {
+	pauseMusic();
+	
 	setBackground(PAUSE_IMG);
 	
 	sf::Event event;
@@ -131,6 +133,8 @@ void Ultra::render()
 
 void Ultra::play()
 {
+	playMusic();
+	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
 	
@@ -191,7 +195,7 @@ bool Sprint::finished()
 
 void Sprint::recordBestScore()
 {
-	std::string lastBestTime;
+	float lastBestTime;
 	
 	std::ifstream fin(SPRINT_DATA_FILE.c_str());
 	
@@ -199,11 +203,11 @@ void Sprint::recordBestScore()
 	
 	fin.close();
 	
-	if(finished() && (timer.format() < lastBestTime))
+	if(finished() && (timer.getTime() < lastBestTime))
 	{
 		std::ofstream fout(SPRINT_DATA_FILE.c_str());
 		
-		fout << timer.format() << std::endl;
+		fout << timer.getTime() << std::endl;
 		
 		fout.close();
 	}
@@ -213,7 +217,15 @@ void Sprint::showBestScore()
 {
 	std::fstream bs(SPRINT_DATA_FILE.c_str(), std::fstream::in | std::fstream::out);
 	
-	std::string minuts, colons, seconds;
+	float bestTime;
+	
+	bs >> bestTime;
+	
+	std::string result;
+	
+	result = timer.format(bestTime);
+	
+	/*std::string minuts, colons, seconds;
 	bs >> minuts;
 	bs >> colons;
 	bs >> seconds;
@@ -222,10 +234,10 @@ void Sprint::showBestScore()
 	bestTime = minuts + " ";
 	bestTime += colons;
 	bestTime += " ";
-	bestTime += seconds;
+	bestTime += seconds;*/
 	
 	sf::String bScore;
-	bScore.SetText(bestTime);
+	bScore.SetText(result);
 	bScore.SetFont(vador);
 	bScore.SetSize(24);
 	bScore.SetColor(sf::Color(158, 14, 64));
@@ -264,6 +276,8 @@ void Sprint::showInfos()
 
 void Sprint::handlePauseInput()
 {
+	pauseMusic();
+	
 	setBackground(PAUSE_IMG);
 	
 	sf::Event event;
@@ -350,7 +364,7 @@ void Sprint::render()
 
 void Sprint::play()
 {
-	renderArea->Clear(sf::Color(245, 245, 200));
+	playMusic();
 	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());

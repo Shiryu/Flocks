@@ -1,5 +1,3 @@
-#include <iostream>
-#include <fstream>
 #include "game.h"
 
 //using namespace std;
@@ -30,6 +28,17 @@ void Game::loadRessources()
 	digital.LoadFromFile(DIGITAL_FONT);
 	vador.LoadFromFile(VADOR_FONT);
 	myriad.LoadFromFile(MYRIAD_FONT);
+	
+	FMOD_System_Create(&system);
+	
+	FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
+	
+	FMOD_System_CreateSound(system, MOVE_SOUND.c_str(), FMOD_DEFAULT, 0, &move);
+	FMOD_System_CreateSound(system, FALL_SOUND.c_str(), FMOD_DEFAULT, 0, &fall);
+	FMOD_System_CreateSound(system, DROP_SOUND.c_str(), FMOD_DEFAULT, 0, &drop);
+	FMOD_System_CreateSound(system, DELETE_SOUND.c_str(), FMOD_DEFAULT, 0, &deletion);
+	
+	FMOD_System_CreateSound(system, BG_MUSIC.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &music);
 }
 
 Game::Game()
@@ -54,9 +63,42 @@ Game::Game(sf::RenderWindow *r)
 
 Game::~Game()
 {
+	FMOD_Sound_Release(fall);
+	FMOD_Sound_Release(move);
+	FMOD_Sound_Release(drop);
+	FMOD_Sound_Release(deletion);
+	FMOD_Sound_Release(music);
+	
+	FMOD_Channel_Stop(channel);
+	FMOD_Channel_Stop(musicChannel);
+	
+	FMOD_System_Close(system);
+	FMOD_System_Release(system);
+	
 	delete renderArea;
 }
 
+void Game::playSound(FMOD_SOUND *sound)
+{
+	FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, sound, 0, &channel);
+}
+
+void Game::playMusic()
+{
+	FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, music, 0, &musicChannel);
+	FMOD_Sound_SetLoopCount(music, -1);
+}
+
+void Game::pauseMusic()
+{
+	FMOD_BOOL musicState;
+	FMOD_Channel_GetPaused(musicChannel, &musicState);
+	
+	if(musicState == 1)
+		FMOD_Channel_SetPaused(musicChannel, 0);
+	else
+		FMOD_Channel_SetPaused(musicChannel, 1);
+}
 int Game::computeLevel()
 {
 	int n = getLinesCompleted();
@@ -333,6 +375,9 @@ void Game::restart()
 {
 	firstTimeHolding = true;
 	
+	shuffleRandomBag();
+	currentPieceIndex = 0;
+	
 	gameArea.clear();
 	
 	setLinesCompleted(0);
@@ -366,6 +411,10 @@ void Game::handlePieceLandAction()
 		setNextPiece(createNewPiece());
 		
 		int n = gameArea.deletePossibleLines();
+		
+		if(n != 0)
+			playSound(deletion);
+		
 		updateGameInfos(n);
 	}
 }
@@ -377,7 +426,11 @@ void Game::handleTimerInput(float currentTime, float &precTime)
 		if(!gameArea.isCurrentPieceFallen())
 			gameArea.moveCurrentPieceDown();
 		else
+		{
+			if(!gameOver())
+				playSound(fall);
 			handlePieceLandAction();
+		}
 				
 		precTime = currentTime;
 	}
@@ -401,13 +454,22 @@ void Game::handleUserInput()
 				gameArea.rotateCurrentPieceLeft();
 			
 			if(event.Key.Code == sf::Key::Left)
+			{
+				playSound(move);
 				gameArea.moveCurrentPieceLeft();
+			}
 								
 			if(event.Key.Code == sf::Key::Right)
+			{
+				playSound(move);
 				gameArea.moveCurrentPieceRight();
+			}
 				
 			if(event.Key.Code == sf::Key::Up)
+			{
+				playSound(move);
 				gameArea.rotateCurrentPieceRight();
+			}
 			
 			if(event.Key.Code == sf::Key::Space)
 			{
@@ -418,7 +480,10 @@ void Game::handleUserInput()
 					if(gameOver())
 						handleGameOverInput();
 					else
+					{
+						playSound(drop);
 						handlePieceLandAction();
+					}
 				}
 			}
 			
@@ -443,7 +508,10 @@ void Game::handleUserInput()
 			if(gameOver())
 				handleGameOverInput();
 			else
+			{
+				playSound(fall);
 				handlePieceLandAction();
+			}
 		}
 	}
 		
@@ -452,6 +520,8 @@ void Game::handleUserInput()
 
 void Game::handlePauseInput()
 {
+	pauseMusic();
+	
 	sf::Event event;
 	
 	while(renderArea->GetEvent(event))
@@ -557,6 +627,8 @@ void Game::render(const std::string backgroundImage)
 
 void Game::play()
 {
+	playMusic();
+	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
 	

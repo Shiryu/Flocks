@@ -7,7 +7,11 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <algorithm>
+
+#include "fmod.h"
+#include "fmod_errors.h"
 
 #include "board.h"
 
@@ -30,6 +34,12 @@ const std::string VADOR_FONT = "fonts/vador.ttf";
 const std::string MYRIAD_FONT = "/Library/Fonts/MyriadPro-Regular.otf";
 const std::string MARATHON_DATA_FILE = "data/marathon.flk";
 
+const std::string FALL_SOUND = "sounds/fall.wav";
+const std::string MOVE_SOUND = "sounds/move.wav";
+const std::string DROP_SOUND = "sounds/drop.wav";
+const std::string DELETE_SOUND = "sounds/delete.wav";
+const std::string BG_MUSIC = "sounds/Korobeiniki.mid";
+
 class Game
 {
 	
@@ -37,6 +47,11 @@ protected:
 	sf::RenderWindow *renderArea;
 	sf::Image blockImage, bgImage, gameOverImage;
 	sf::Font vador, digital, myriad;
+	
+	FMOD_SYSTEM *system;
+	FMOD_CHANNEL *channel, *musicChannel;
+	FMOD_SOUND *fall, *move, *drop, *deletion;
+	FMOD_SOUND *music;
 	
 	std::string toString(int n)
 	{
@@ -71,6 +86,10 @@ public:
 	Game();
 	Game(sf::RenderWindow *r);
 	~Game();
+	
+	void playSound(FMOD_SOUND *sound);
+	void playMusic();
+	void pauseMusic();
 	
 	void setCurrentGamePiece(BPiece p) { currentGamePiece = p; }
 	BPiece getCurrentGamePiece() { return currentGamePiece; }
