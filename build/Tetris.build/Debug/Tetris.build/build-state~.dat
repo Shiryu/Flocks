@@ -1,214 +1,0 @@
-TTetris
-v7
-r0
-t314434272.783772
-cCheck dependencies
-cProcessInfoPlistFile /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist Info.plist
-cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o /Users/Feysal/Tetris/main.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o /Users/Feysal/Tetris/board.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-cCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o /Users/Feysal/Tetris/piece.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework /Library/Frameworks/sfml-system.framework
-cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework /Library/Frameworks/sfml-window.framework
-cPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework /Library/Frameworks/sfml-graphics.framework
-
-N/Library/Frameworks/sfml-graphics.framework
-c000000004D091FCE00000000000000CC
-t1292443598
-s204
-
-N/Library/Frameworks/sfml-graphics.framework/sfml-graphics
-c000000004BBA050600000000004FCC40
-t1270482182
-s5229632
-
-N/Library/Frameworks/sfml-system.framework
-c000000004D091FC200000000000000CC
-t1292443586
-s204
-
-N/Library/Frameworks/sfml-system.framework/sfml-system
-c000000004BBA050700000000001C45D8
-t1270482183
-s1852888
-
-N/Library/Frameworks/sfml-window.framework
-c000000004D091FC700000000000000CC
-t1292443591
-s204
-
-N/Library/Frameworks/sfml-window.framework/sfml-window
-c000000004BBA050700000000001FC530
-t1270482183
-s2082096
-
-N/System/Library/Frameworks/SFML.framework/Headers/Graphics.hpp
-c000000004BBA050700000000000006DA
-t1270482183
-s1754
-
-N/Users/Feysal/Tetris/board.cpp
-c000000004D0DAAEC000000000000031A
-t1292741356
-s794
-i<ostream>
-i<fstream>
-i"board.h"
-
-N/Users/Feysal/Tetris/board.h
-c000000004D0DA77200000000000000D1
-t1292740466
-s209
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app
-t2
-s0
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework
-t1292741471
-s170
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework
-t1292741471
-s170
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework
-t1292741471
-s170
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist
-t1292741471
-s602
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris
-t2
-s0
-
-N/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/PkgInfo
-t1292741471
-s8
-
-N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/Tetris.LinkFileList
-c000000004D0DAB5F0000000000000104
-t1292741471
-s260
-
-N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o
-t2
-s0
-
-N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o
-t2
-s0
-
-N/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o
-t2
-s0
-
-N/Users/Feysal/Tetris/main.cpp
-c000000004D0DAB310000000000000477
-t1292741425
-s1143
-i"board.h"
-i<SFML/Graphics.hpp>
-
-N/Users/Feysal/Tetris/piece.cpp
-c000000004D0DAB59000000000000017F
-t1292741465
-s383
-i"piece.h"
-
-N/Users/Feysal/Tetris/piece.h
-c000000004D0DAB48000000000000015D
-t1292741448
-s349
-
-NInfo.plist
-c000000004D0D3B95000000000000027A
-t1292712853
-s634
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies314434271#314434271#0(0"0(0#1#0"3343187568374212096#0"0#
-
-CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o /Users/Feysal/Tetris/board.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-s314434271.782408
-e314434271.784109
-r0
-xCompileC
-xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o
-x/Users/Feysal/Tetris/board.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@38"Compile /Users/Feysal/Tetris/board.cpp314434271#314434271#0(1825"In file included from /Users/Feysal/Tetris/board.cpp:3:/Users/Feysal/Tetris/board.h:1:1: error: unterminated #ifndefIn file included from /Users/Feysal/Tetris/board.cpp:3:/Users/Feysal/Tetris/board.h:16: error: 'Piece' has not been declared/Users/Feysal/Tetris/board.h:10: error: an anonymous union cannot have function members/Users/Feysal/Tetris/board.h:19: error: abstract declarator '<anonymous class>' used as declaration/Users/Feysal/Tetris/board.cpp: In function 'void flood(int, int, int, int)':/Users/Feysal/Tetris/board.cpp:7: error: 'SIZE' was not declared in this scope/Users/Feysal/Tetris/board.cpp:9: error: 'p' was not declared in this scope/Users/Feysal/Tetris/board.cpp:12: error: 'visited' was not declared in this scope/Users/Feysal/Tetris/board.cpp:12: error: 'PIECES' was not declared in this scope/Users/Feysal/Tetris/board.cpp:15: error: 'visited' was not declared in this scope/Users/Feysal/Tetris/board.cpp:16: error: 'area' was not declared in this scope/Users/Feysal/Tetris/board.cpp:16: error: 'PIECES' was not declared in this scope/Users/Feysal/Tetris/board.cpp: At global scope:/Users/Feysal/Tetris/board.cpp:24: error: variable or field 'addNewPiece' declared void/Users/Feysal/Tetris/board.cpp:24: error: 'Piece' was not declared in this scope/Users/Feysal/Tetris/board.cpp: In function 'void draw()':/Users/Feysal/Tetris/board.cpp:34: error: 'ofstream' was not declared in this scope/Users/Feysal/Tetris/board.cpp:34: error: expected `;' before 'fout'/Users/Feysal/Tetris/board.cpp:39: error: 'fout' was not declared in this scope/Users/Feysal/Tetris/board.cpp:39: error: 'area' was not declared in this scope/Users/Feysal/Tetris/board.cpp:40: error: 'fout' was not declared in this scope/Users/Feysal/Tetris/board.cpp:40: error: 'endl' was not declared in this scope20(4@20"Unterminated #ifndef314434271#56#62#2(7@52"In file included from /Users/Feysal/Tetris/board.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#3#0#3#0#0"0(13@52"Unterminated #ifndef in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#1#0#1#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#1#0#1#0#0"0(4@29"'Piece' has not been declared314434271#174#70#2(7@52"In file included from /Users/Feysal/Tetris/board.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#3#0#3#0#0"0(13@61"'Piece' has not been declared in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#16#0#16#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#16#0#16#0#25"'*' has not been declared0(4@47"An anonymous union cannot have function members314434271#244#88#2(7@52"In file included from /Users/Feysal/Tetris/board.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#3#0#3#0#0"0(13@79"An anonymous union cannot have function members in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#10#0#10#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#10#0#10#0#0"0(4@59"Abstract declarator '<anonymous class>' used as declaration314434271#332#100#2(7@52"In file included from /Users/Feysal/Tetris/board.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#3#0#3#0#0"0(13@91"Abstract declarator '<anonymous class>' used as declaration in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#19#0#19#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#19#0#19#0#0"0(4@37"'SIZE' was not declared in this scope314434271#510#79#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#7#0#7#0#34"'*' was not declared in this scope0(4@34"'p' was not declared in this scope314434271#589#76#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#9#0#9#0#34"'*' was not declared in this scope0(4@40"'visited' was not declared in this scope314434271#665#83#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#12#0#12#0#34"'*' was not declared in this scope0(4@39"'PIECES' was not declared in this scope314434271#748#82#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#12#0#12#0#34"'*' was not declared in this scope0(4@40"'visited' was not declared in this scope314434271#830#83#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#15#0#15#0#34"'*' was not declared in this scope0(4@37"'area' was not declared in this scope314434271#913#80#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#16#0#16#0#34"'*' was not declared in this scope0(4@39"'PIECES' was not declared in this scope314434271#993#82#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#16#0#16#0#34"'*' was not declared in this scope0(23@16"At global scope:314434271#1075#49#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#0#0#0#0#0"0(4@45"Variable or field 'addNewPiece' declared void314434271#1124#88#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#24#0#24#0#0"0(4@38"'Piece' was not declared in this scope314434271#1212#81#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#24#0#24#0#34"'*' was not declared in this scope0(4@41"'ofstream' was not declared in this scope314434271#1352#84#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#34#0#34#0#34"'*' was not declared in this scope0(4@26"Expected `;' before 'fout'314434271#1436#69#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#34#0#34#0#19"expected * before *0(4@37"'fout' was not declared in this scope314434271#1505#80#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#39#0#39#0#34"'*' was not declared in this scope0(4@37"'area' was not declared in this scope314434271#1585#80#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#39#0#39#0#34"'*' was not declared in this scope0(4@37"'fout' was not declared in this scope314434271#1665#80#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#40#0#40#0#34"'*' was not declared in this scope0(4@37"'endl' was not declared in this scope314434271#1745#80#0(6@30"/Users/Feysal/Tetris/board.cpp314434156#40#0#40#0#34"'*' was not declared in this scope0(0#0#30"/Users/Feysal/Tetris/board.cpp8611726144#972"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/board.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/board.o1#
-
-CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o /Users/Feysal/Tetris/main.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-s314434271.732676
-e314434271.782329
-r0
-xCompileC
-xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o
-x/Users/Feysal/Tetris/main.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@37"Compile /Users/Feysal/Tetris/main.cpp314434271#314434271#0(923"In file included from /Users/Feysal/Tetris/main.cpp:1:/Users/Feysal/Tetris/board.h:1:1: error: unterminated #ifndefIn file included from /Users/Feysal/Tetris/main.cpp:1:/Users/Feysal/Tetris/board.h:16: error: 'Piece' has not been declared/Users/Feysal/Tetris/board.h:10: error: an anonymous union cannot have function members/Users/Feysal/Tetris/board.h:19: error: abstract declarator '<anonymous class>' used as declaration/Users/Feysal/Tetris/main.cpp: In function 'int main()':/Users/Feysal/Tetris/main.cpp:5: error: 'Board' was not declared in this scope/Users/Feysal/Tetris/main.cpp:5: error: expected `;' before 'b'/Users/Feysal/Tetris/main.cpp:6: error: 'Piece' was not declared in this scope/Users/Feysal/Tetris/main.cpp:6: error: expected `;' before 'p'/Users/Feysal/Tetris/main.cpp:8: error: 'b' was not declared in this scope/Users/Feysal/Tetris/main.cpp:8: error: 'p' was not declared in this scope10(4@20"Unterminated #ifndef314434271#55#62#2(7@51"In file included from /Users/Feysal/Tetris/main.cpp314434271#18446744073709551615#0#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#1#0#1#0#0"0(13@52"Unterminated #ifndef in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#1#0#1#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#1#0#1#0#0"0(4@29"'Piece' has not been declared314434271#172#70#2(7@51"In file included from /Users/Feysal/Tetris/main.cpp314434271#18446744073709551615#0#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#1#0#1#0#0"0(13@61"'Piece' has not been declared in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#16#0#16#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#16#0#16#0#25"'*' has not been declared0(4@47"An anonymous union cannot have function members314434271#242#88#2(7@51"In file included from /Users/Feysal/Tetris/main.cpp314434271#18446744073709551615#0#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#1#0#1#0#0"0(13@79"An anonymous union cannot have function members in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#10#0#10#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#10#0#10#0#0"0(4@59"Abstract declarator '<anonymous class>' used as declaration314434271#330#100#2(7@51"In file included from /Users/Feysal/Tetris/main.cpp314434271#18446744073709551615#0#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#1#0#1#0#0"0(13@91"Abstract declarator '<anonymous class>' used as declaration in /Users/Feysal/Tetris/board.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/board.h314433266#19#0#19#0#0"0(6@28"/Users/Feysal/Tetris/board.h314433266#19#0#19#0#0"0(4@38"'Board' was not declared in this scope314434271#487#79#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#5#0#5#0#34"'*' was not declared in this scope0(4@23"Expected `;' before 'b'314434271#566#64#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#5#0#5#0#19"expected * before *0(4@38"'Piece' was not declared in this scope314434271#630#79#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#6#0#6#0#34"'*' was not declared in this scope0(4@23"Expected `;' before 'p'314434271#709#64#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#6#0#6#0#19"expected * before *0(4@34"'b' was not declared in this scope314434271#773#75#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#8#0#8#0#34"'*' was not declared in this scope0(4@34"'p' was not declared in this scope314434271#848#75#0(6@29"/Users/Feysal/Tetris/main.cpp314434225#8#0#8#0#34"'*' was not declared in this scope0(0#0#29"/Users/Feysal/Tetris/main.cpp8611538496#970"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/main.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/main.o1#
-
-CCompileC build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o /Users/Feysal/Tetris/piece.cpp normal i386 c++ com.apple.compilers.gcc.4_2
-s314434271.784172
-e314434271.785368
-r0
-xCompileC
-xbuild/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o
-x/Users/Feysal/Tetris/piece.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@38"Compile /Users/Feysal/Tetris/piece.cpp314434271#314434271#0(257"In file included from /Users/Feysal/Tetris/piece.h:4,                 from /Users/Feysal/Tetris/piece.cpp:1:/Users/Feysal/Tetris/types.h:42: error: expected `}' before '{' token/Users/Feysal/Tetris/types.h:42: error: expected ',' or ';' before '{' token2(4@29"Expected `}' before '{' token314434271#110#70#3(7@52"In file included from /Users/Feysal/Tetris/piece.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/piece.cpp314434265#1#0#1#0#0"0(7@50"In file included from /Users/Feysal/Tetris/piece.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/piece.h314434248#4#0#4#0#0"0(13@61"Expected `}' before '{' token in /Users/Feysal/Tetris/types.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/types.h314407076#42#0#42#0#0"0(6@28"/Users/Feysal/Tetris/types.h314407076#42#0#42#0#19"expected * before *0(4@36"Expected ',' or ';' before '{' token314434271#180#77#3(7@52"In file included from /Users/Feysal/Tetris/piece.cpp314434271#18446744073709551615#0#0(6@30"/Users/Feysal/Tetris/piece.cpp314434265#1#0#1#0#0"0(7@50"In file included from /Users/Feysal/Tetris/piece.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/piece.h314434248#4#0#4#0#0"0(13@68"Expected ',' or ';' before '{' token in /Users/Feysal/Tetris/types.h314434271#18446744073709551615#0#0(6@28"/Users/Feysal/Tetris/types.h314407076#42#0#42#0#0"0(6@28"/Users/Feysal/Tetris/types.h314407076#42#0#42#0#19"expected * before *0(0#0#30"/Users/Feysal/Tetris/piece.cpp8610312000#972"    cd /Users/Feysal/Tetris    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -mfix-and-continue -fvisibility-inlines-hidden -gdwarf-2 -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-generated-files.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-own-target-headers.hmap -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-all-target-headers.hmap -iquote /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Tetris-project-headers.hmap -F/Users/Feysal/Tetris/build/Debug -I/Users/Feysal/Tetris/build/Debug/include -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources/i386 -I/Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/DerivedSources -c /Users/Feysal/Tetris/piece.cpp -o /Users/Feysal/Tetris/build/Tetris.build/Debug/Tetris.build/Objects-normal/i386/piece.o1#
-
-CLd /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/MacOS/Tetris normal i386
-r0
-
-CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework /Library/Frameworks/sfml-graphics.framework
-s314434271.813448
-e314434272.783068
-r1
-xPBXCp
-xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-graphics.framework
-x/Library/Frameworks/sfml-graphics.framework
-lSLF07#2@48"Copy /Library/Frameworks/sfml-graphics.framework314434271#314434273#0(0"0(0#0#43"/Library/Frameworks/sfml-graphics.framework8611785536#284"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-graphics.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
-
-CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework /Library/Frameworks/sfml-system.framework
-s314434271.785430
-e314434272.282459
-r1
-xPBXCp
-xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-system.framework
-x/Library/Frameworks/sfml-system.framework
-lSLF07#2@46"Copy /Library/Frameworks/sfml-system.framework314434271#314434272#0(0"0(0#0#41"/Library/Frameworks/sfml-system.framework8608489728#282"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-system.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
-
-CPBXCp build/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework /Library/Frameworks/sfml-window.framework
-s314434271.812650
-e314434272.269424
-r1
-xPBXCp
-xbuild/Debug/Tetris.app/Contents/Frameworks/sfml-window.framework
-x/Library/Frameworks/sfml-window.framework
-lSLF07#2@46"Copy /Library/Frameworks/sfml-window.framework314434271#314434272#0(0"0(0#0#41"/Library/Frameworks/sfml-window.framework30118312141586552#282"    cd /Users/Feysal/Tetris    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Library/Frameworks/sfml-window.framework /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Frameworks0#
-
-CProcessInfoPlistFile /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist Info.plist
-s314434271.680197
-e314434271.732561
-r1
-xProcessInfoPlistFile
-x/Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist
-xInfo.plist
-lSLF07#2@18"Process Info.plist314434271#314434271#0(0"0(0#0#31"/Users/Feysal/Tetris/Info.plist32932993185022068#246"    cd /Users/Feysal/Tetris    builtin-infoPlistUtility Info.plist -genpkginfo /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/Feysal/Tetris/build/Debug/Tetris.app/Contents/Info.plist0#
-
-CTouch /Users/Feysal/Tetris/build/Debug/Tetris.app
-r0
-
