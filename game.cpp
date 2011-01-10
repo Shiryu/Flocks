@@ -8,16 +8,16 @@ void Game::initRandomBag()
 {
 	currentPieceIndex = 0;
 	
-	for(int i = 0; i < NB_KINDS; ++i)
+	for(int i = 0, j = NB_KINDS; i < NB_KINDS, j < RANDOMBAG_SIZE; ++i, ++j)
+	{
 		randomBag[i] = i;
-	
-	for(int i = NB_KINDS; i < N; ++i)
-		randomBag[i] = i - NB_KINDS; 
+		randomBag[j] = j - NB_KINDS;
+	}
 }
 
 void Game::shuffleRandomBag()
 {
-	std::random_shuffle(randomBag, randomBag + N);
+	std::random_shuffle(randomBag, randomBag + RANDOMBAG_SIZE);
 }
 
 void Game::loadRessources()
@@ -34,15 +34,20 @@ void Game::loadRessources()
 	FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
 	
 	FMOD_System_CreateSound(system, MOVE_SOUND.c_str(), FMOD_DEFAULT, 0, &move);
-	FMOD_System_CreateSound(system, FALL_SOUND.c_str(), FMOD_DEFAULT, 0, &fall);
+	FMOD_System_CreateSound(system, HOLD_SOUND.c_str(), FMOD_DEFAULT, 0, &hold);
 	FMOD_System_CreateSound(system, DROP_SOUND.c_str(), FMOD_DEFAULT, 0, &drop);
 	FMOD_System_CreateSound(system, DELETE_SOUND.c_str(), FMOD_DEFAULT, 0, &deletion);
 	
-	FMOD_System_CreateSound(system, BG_MUSIC.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &music);
+	FMOD_System_CreateSound(system, MARATHON_MUSIC.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &marathonMusic);
+	FMOD_System_CreateSound(system, SPRINT_MUSIC.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &sprintMusic);
+	FMOD_System_CreateSound(system, ULTRA_MUSIC.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &ultraMusic);
+	
+	FMOD_Channel_SetVolume(musicChannel, 0.5);
 }
 
 Game::Game()
 {
+	config.loadConfig();
 	loadRessources();
 	
 	firstTimeHolding = true;
@@ -52,6 +57,8 @@ Game::Game()
 
 Game::Game(sf::RenderWindow *r)
 {
+	config.loadConfig();
+	
 	loadRessources();
 	
 	firstTimeHolding = true;
@@ -63,42 +70,47 @@ Game::Game(sf::RenderWindow *r)
 
 Game::~Game()
 {
-	FMOD_Sound_Release(fall);
+	FMOD_Sound_Release(hold);
 	FMOD_Sound_Release(move);
 	FMOD_Sound_Release(drop);
 	FMOD_Sound_Release(deletion);
-	FMOD_Sound_Release(music);
 	
-	FMOD_Channel_Stop(channel);
-	FMOD_Channel_Stop(musicChannel);
+	FMOD_Sound_Release(marathonMusic);
+	FMOD_Sound_Release(sprintMusic);
+	FMOD_Sound_Release(ultraMusic);
+	
+	//FMOD_Channel_Stop(channel);
+	//FMOD_Channel_Stop(musicChannel);
 	
 	FMOD_System_Close(system);
 	FMOD_System_Release(system);
-	
-	delete renderArea;
 }
 
 void Game::playSound(FMOD_SOUND *sound)
 {
-	FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, sound, 0, &channel);
+	if(config.m[SOUND] == true)
+		FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, sound, 0, &channel);
 }
 
-void Game::playMusic()
+void Game::playMusic(FMOD_SOUND *music)
 {
-	FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, music, 0, &musicChannel);
-	FMOD_Sound_SetLoopCount(music, -1);
+	if(config.m[MUSIC] == true)
+	{
+		FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, music, 0, &musicChannel);
+		FMOD_Sound_SetLoopCount(music, -1);
+	}
 }
 
 void Game::pauseMusic()
 {
-	FMOD_BOOL musicState;
-	FMOD_Channel_GetPaused(musicChannel, &musicState);
-	
-	if(musicState == 1)
-		FMOD_Channel_SetPaused(musicChannel, 0);
-	else
-		FMOD_Channel_SetPaused(musicChannel, 1);
+	FMOD_Channel_SetPaused(musicChannel, 1);
 }
+
+void Game::continueMusic()
+{
+	FMOD_Channel_SetPaused(musicChannel, 0);
+}
+
 int Game::computeLevel()
 {
 	int n = getLinesCompleted();
@@ -141,19 +153,9 @@ int Game::computeScore(int nbLinesDeleted)
 	return score;
 }
 
-/*BPiece Game::createNewPiece()
+Piece Game::createNewPiece()
 {
-	int kind = sf::Randomizer::Random(0, NB_KINDS - 1);
-	//int orientation = sf::Randomizer::Random(0, NB_ROTATIONS - 1);
-	
-	BPiece b(Piece(kind, 0));
-
-	return b;
-}*/
-
-BPiece Game::createNewPiece()
-{
-	if(currentPieceIndex == N - 1)
+	if(currentPieceIndex == RANDOMBAG_SIZE - 1)
 	{
 		currentPieceIndex = 0;
 		shuffleRandomBag();
@@ -161,7 +163,7 @@ BPiece Game::createNewPiece()
 	
 	int kind = randomBag[currentPieceIndex++];
 	
-	BPiece b(Piece(kind, 0));
+	Piece b(kind, 0);
 	
 	return b;
 }
@@ -181,7 +183,7 @@ void Game::updateGameInfos(int nbLinesDeleted)
 
 void Game::restoreHoldPiece()
 {
-	BPiece temp = getHoldPiece();
+	Piece temp = getHoldPiece();
 	setHoldPiece(getCurrentGamePiece());
 	setCurrentGamePiece(temp);
 	enableCurrentPiece();
@@ -263,7 +265,7 @@ void Game::showLinesCompleted()
 	renderArea->Draw(currentLinesCompleted);
 }
 
-void Game::showPiece(BPiece p, int x, int y)
+void Game::showPiece(Piece p, int x, int y)
 {
 	int k = p.getKind();
 	int o = p.getOrientation();
@@ -373,6 +375,8 @@ void Game::showInfos()
 
 void Game::restart()
 {
+	continueMusic();
+	
 	firstTimeHolding = true;
 	
 	shuffleRandomBag();
@@ -428,7 +432,7 @@ void Game::handleTimerInput(float currentTime, float &precTime)
 		else
 		{
 			if(!gameOver())
-				playSound(fall);
+				playSound(drop);
 			handlePieceLandAction();
 		}
 				
@@ -448,10 +452,16 @@ void Game::handleUserInput()
 		if(event.Type == sf::Event::KeyPressed)
 		{
 			if(event.Key.Shift)
+			{
+				playSound(hold);
 				holdCurrentPiece();
+			}
 			
 			if(event.Key.Control)
+			{
+				playSound(move);
 				gameArea.rotateCurrentPieceLeft();
+			}
 			
 			if(event.Key.Code == sf::Key::Left)
 			{
@@ -509,7 +519,7 @@ void Game::handleUserInput()
 				handleGameOverInput();
 			else
 			{
-				playSound(fall);
+				playSound(drop);
 				handlePieceLandAction();
 			}
 		}
@@ -518,9 +528,11 @@ void Game::handleUserInput()
 
 }
 
-void Game::handlePauseInput()
+int Game::handlePauseInput()
 {
 	pauseMusic();
+	
+	setBackground(PAUSE_IMG);
 	
 	sf::Event event;
 	
@@ -532,31 +544,46 @@ void Game::handlePauseInput()
 		if(event.Type == sf::Event::KeyPressed)
 		{
 			if(event.Key.Code == sf::Key::P)
+			{
+				continueMusic();
 				setState(RUNNING);
+			}
 			
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
-void Game::handleGameOverInput()
+int Game::handleGameOverInput()
 {
+	pauseMusic();
+	
 	recordBestScore();
 	
-	setBackground(GAME_OVER_IMG);
+	if(getLevel() == 10 && getLinesCompleted() >= 100)
+		setBackground("images/congrat.png");
+	else
+	{
+		setBackground(GAME_OVER_IMG);
 	
-	sf::String level, lines, score;
+		sf::String level, lines, score;
 	
-	level.SetText(toString(getLevel())); lines.SetText(toString(getLinesCompleted())); score.SetText(toString(getScore()));
+		level.SetText(toString(getLevel())); lines.SetText(toString(getLinesCompleted())); score.SetText(toString(getScore()));
 		
-	level.SetFont(vador); lines.SetFont(vador); score.SetFont(vador);
+		level.SetFont(vador); lines.SetFont(vador); score.SetFont(vador);
 		
-	level.SetSize(24.0); lines.SetSize(24.0); score.SetSize(24.0);
+		level.SetSize(24.0); lines.SetSize(24.0); score.SetSize(24.0);
 
-	level.SetPosition(270.0, 175.0); lines.SetPosition(270.0, 205.0); score.SetPosition(270.0, 230.0);
+		level.SetPosition(270.0, 175.0); lines.SetPosition(270.0, 205.0); score.SetPosition(270.0, 230.0);
 		
-	renderArea->Draw(level); renderArea->Draw(lines); renderArea->Draw(score);
+		renderArea->Draw(level); renderArea->Draw(lines); renderArea->Draw(score);
+	}
 	
 	sf::Event event;
 	
@@ -569,8 +596,13 @@ void Game::handleGameOverInput()
 		{
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
 void Game::render(const std::string backgroundImage)
@@ -627,7 +659,7 @@ void Game::render(const std::string backgroundImage)
 
 void Game::play()
 {
-	playMusic();
+	playMusic(marathonMusic);
 	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
@@ -644,13 +676,13 @@ void Game::play()
 	fallingClock.Reset();
 	
 	float currentTime = 0, precTime = 0;
-
+	
 	while(renderArea->IsOpened())
 	{
 		if(getState() == PAUSED)
 		{
-			setBackground(PAUSE_IMG);
-			handlePauseInput();
+			if(handlePauseInput() == RETURN_MAIN)
+				return;
 		}
 		else
 		{
@@ -661,14 +693,15 @@ void Game::play()
 			handleUserInput();
 			
 			
-			if(gameOver())
-				handleGameOverInput();
-			else
+			if(!gameOver())
 				render(BG_IMG);
-			
+			else
+			{
+				if(handleGameOverInput() == RETURN_MAIN)
+					return;
+			}
 		}
-		
-		
+				
 		renderArea->Display();
 	}
 }

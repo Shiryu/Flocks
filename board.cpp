@@ -51,7 +51,7 @@ Board::Board()
 			area[i][j] = FREE;
 }
 
-void Board::drawPiece(BPiece p)
+void Board::drawPiece(Piece p)
 {
 	int i = p.getPosX();
 	int j = p.getPosY();
@@ -89,7 +89,7 @@ void Board::drawPiece(BPiece p)
 	floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, p.getColor());
 }
 
-void Board::clearPiece(BPiece p)
+void Board::clearPiece(Piece p)
 {
 	int i = p.getPosX();
 	int j = p.getPosY();
@@ -100,13 +100,9 @@ void Board::clearPiece(BPiece p)
 	floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, FREE);
 }
 
-void Board::newPiece(BPiece p)
+void Board::newPiece(Piece p)
 {
-	/*if(p.willOverflowBoard())
-		p.setPosX(ORIGIN_X + 1);
-	else*/
-		p.setPosX(ORIGIN_X);
-	
+	p.setPosX(ORIGIN_X);
 	p.setPosY(ORIGIN_Y);
 	
 	drawPiece(p);
@@ -249,7 +245,7 @@ void Board::drawGhostPiece()
 {
 	if(!isCurrentPieceFallen())
 	{
-		BPiece ghost = getCurrentPiece();
+		Piece ghost = getCurrentPiece();
 		int x = currentPiece.getPosX();
 		int y = currentPiece.getPosY();
 	
@@ -329,13 +325,13 @@ bool Board::isGameOver()
 {
 	for(int i = 0; i < BOARD_WIDTH; ++i)
 	{
-		if(area[i][0] != FREE)
+		if(area[i][0] != FREE && area[i][0] != GHOST)
 			return true;
 	}
 	
 	return false;
 }
-
+	
 void Board::clear()
 {
 	for(int i = 0; i < BOARD_WIDTH; ++i)

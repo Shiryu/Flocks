@@ -7,12 +7,13 @@
 const std::string ULTRA_BG_IMG = "images/ultra.png";
 const std::string SPRINT_BG_IMG = "images/sprint.png";
 const std::string TIME_ELAPSED_IMG = "images/timeelapsed.png";
-const std::string DS_DIGITAL_FONT = "fonts/ds_digital/DS-DIGI.ttf";
-const std::string ULTRA_DATA_FILE = "data/ultra.flk";
-
 const std::string SPRINT_FINISHED_IMG = "images/sprintfinished.png";
 const std::string SPRINT_GAMEOVER_IMG = "images/sprintgameover.png";
+
+const std::string DS_DIGITAL_FONT = "fonts/ds_digital/DS-DIGI.ttf";
+
 const std::string SPRINT_DATA_FILE = "data/sprint.flk";
+const std::string ULTRA_DATA_FILE = "data/ultra.flk";
 
 const int NB_LINES_TO_DELETE = 40;
 
@@ -23,6 +24,7 @@ private:
 	
 public:
 	Ultra(sf::RenderWindow *renderArea) : Game(renderArea) { timer.reset(); }
+	~Ultra();
 	
 	void restart();
 	
@@ -33,8 +35,8 @@ public:
 	
 	bool timeElapsed();
 	
-	void handlePauseInput();
-	void handleGameOverInput();
+	int handlePauseInput();
+	int handleGameOverInput();
 	
 	void render();
 	void play();
@@ -48,6 +50,7 @@ private:
 	
 public:
 	Sprint(sf::RenderWindow *renderArea) : Game(renderArea) { timer.reset(); nbLinesToDelete = NB_LINES_TO_DELETE; }
+	~Sprint();
 	
 	void setNbLinesToDelete(int n) { nbLinesToDelete = n; }
 	int getNbLinesToDelete() { return nbLinesToDelete; }
@@ -61,8 +64,8 @@ public:
 	
 	bool finished();
 	
-	void handlePauseInput();
-	void handleGameOverInput();
+	int handlePauseInput();
+	int handleGameOverInput();
 	
 	void render();
 	void play();

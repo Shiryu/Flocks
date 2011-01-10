@@ -109,6 +109,35 @@ public:
 		return (int)getTime() % 60;
 	}
 	
+	std::string format(float time)
+	{
+		int minutes = (int)time / 60;
+		int seconds = (int)time % 60;
+		
+		std::string strMinutes, strSeconds;
+		
+		if(minutes >= 10)
+			strMinutes = toString(minutes);
+		else
+		{
+			strMinutes.push_back('0');
+			strMinutes += toString(minutes);
+		}
+		
+		if(seconds >= 10)
+			strSeconds = toString(seconds);
+		else
+		{
+			strSeconds.push_back('0');
+			strSeconds += toString(seconds);
+		}
+		
+		std::string result = strMinutes + " : ";
+		result += strSeconds;
+		
+		return result;
+	}
+	
 	std::string format()
 	{
 		int minutes = getMinutes();

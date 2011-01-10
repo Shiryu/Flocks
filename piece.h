@@ -3,17 +3,9 @@
 
 #include "shapes.h"
 
-enum
-{
-	CYAN = 1,
-	BLUE,
-	ORANGE,
-	YELLOW,
-	GREEN,
-	PURPLE,
-	RED,
-	GHOST
-};
+enum {O, I, S, Z, L, J, T};
+
+enum { CYAN = 1, BLUE, ORANGE, YELLOW, GREEN, PURPLE, RED, GHOST };
 
 const int PIVOT_X = 1;
 const int PIVOT_Y = 2;
@@ -26,10 +18,13 @@ private:
 	int orientation;
 	int color;
 	
+	int posX;
+	int posY;
+	
 public:
 	Piece() { }
 	Piece(int k, int o) { kind = k; orientation = o; }
-	Piece(const Piece &p) { kind = p.kind; orientation = p.orientation; color = p.color; }
+	Piece(const Piece &p) { kind = p.kind; orientation = p.orientation; color = p.color; posX = p.posX; posY = p.posY; }
 	
 	void setKind(int k) { kind = k; }
 	void setOrientation(int o) { orientation = o; }
@@ -40,16 +35,11 @@ public:
 	void setColor(int c) { color = c; }
 	int getColor() { return color; }
 	
-	bool willOverflowBoard()
-	{
-		for(int j = 0; j < SIZE; ++j)
-		{
-			if(PIECES[kind][orientation][0][j] == 1)
-				return true;
-		}
-		
-		return false;
-	}
+	void setPosX(int x) { posX = x; }
+	int getPosX() { return posX; }
+	
+	void setPosY(int y) { posY = y; }
+	int getPosY() { return posY; }
 };
 
 #endif

@@ -1,5 +1,22 @@
 #include "mode.h"
 
+std::ofstream fout("output.txt");
+
+Ultra::~Ultra()
+{
+	FMOD_Sound_Release(hold);
+	FMOD_Sound_Release(move);
+	FMOD_Sound_Release(drop);
+	FMOD_Sound_Release(deletion);
+	
+	FMOD_Sound_Release(marathonMusic);
+	FMOD_Sound_Release(sprintMusic);
+	FMOD_Sound_Release(ultraMusic);
+	
+	FMOD_System_Close(system);
+	FMOD_System_Release(system);
+}
+
 void Ultra::restart()
 {
 	timer.reset();
@@ -63,7 +80,7 @@ void Ultra::showBestScore()
 	bs.close();
 }
 
-void Ultra::handlePauseInput()
+int Ultra::handlePauseInput()
 {
 	pauseMusic();
 	
@@ -79,16 +96,26 @@ void Ultra::handlePauseInput()
 		if(event.Type ==  sf::Event::KeyPressed)
 		{
 			if(event.Key.Code == sf::Key::P)
+			{
+				continueMusic();
 				setState(RUNNING);
+			}
 			
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
-void Ultra::handleGameOverInput()
+int Ultra::handleGameOverInput()
 {
+	pauseMusic();
+	
 	Ultra::recordBestScore();
 	
 	if(Game::gameOver())
@@ -120,8 +147,13 @@ void Ultra::handleGameOverInput()
 		{
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
 void Ultra::render()
@@ -133,7 +165,13 @@ void Ultra::render()
 
 void Ultra::play()
 {
-	playMusic();
+	float volume = 0.0;
+	FMOD_Channel_SetVolume(musicChannel, 1.0);
+	FMOD_Channel_GetVolume(musicChannel, &volume);
+	
+	fout << volume << std::endl;
+	
+	playMusic(ultraMusic);
 	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
@@ -155,8 +193,12 @@ void Ultra::play()
 	{
 		if(getState() == PAUSED)
 		{
+			setBackground(PAUSE_IMG);
+			
 			timer.pause();
-			handlePauseInput();
+			
+			if(handlePauseInput() == RETURN_MAIN)
+				return;
 		}
 		else
 		{
@@ -168,7 +210,10 @@ void Ultra::play()
 			handleUserInput();
 			
 			if(Game::gameOver() || timeElapsed())
-				handleGameOverInput();
+			{
+				if(handleGameOverInput() == RETURN_MAIN)
+					return;
+			}
 			else
 				render();
 		}
@@ -177,6 +222,21 @@ void Ultra::play()
 	}
 }
 
+
+Sprint::~Sprint()
+{
+	FMOD_Sound_Release(hold);
+	FMOD_Sound_Release(move);
+	FMOD_Sound_Release(drop);
+	FMOD_Sound_Release(deletion);
+	
+	FMOD_Sound_Release(marathonMusic);
+	FMOD_Sound_Release(sprintMusic);
+	FMOD_Sound_Release(ultraMusic);
+	
+	FMOD_System_Close(system);
+	FMOD_System_Release(system);
+}
 
 void Sprint::restart()
 {
@@ -225,17 +285,6 @@ void Sprint::showBestScore()
 	
 	result = timer.format(bestTime);
 	
-	/*std::string minuts, colons, seconds;
-	bs >> minuts;
-	bs >> colons;
-	bs >> seconds;
-	
-	std::string bestTime;
-	bestTime = minuts + " ";
-	bestTime += colons;
-	bestTime += " ";
-	bestTime += seconds;*/
-	
 	sf::String bScore;
 	bScore.SetText(result);
 	bScore.SetFont(vador);
@@ -274,7 +323,7 @@ void Sprint::showInfos()
 	renderArea->Draw(currentLinesCompleted);
 }
 
-void Sprint::handlePauseInput()
+int Sprint::handlePauseInput()
 {
 	pauseMusic();
 	
@@ -290,16 +339,26 @@ void Sprint::handlePauseInput()
 		if(event.Type ==  sf::Event::KeyPressed)
 		{
 			if(event.Key.Code == sf::Key::P)
+			{
+				continueMusic();
 				setState(RUNNING);
+			}
 			
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
-void Sprint::handleGameOverInput()
+int Sprint::handleGameOverInput()
 {
+	pauseMusic();
+	
 	recordBestScore();
 	
 	if(Game::gameOver())
@@ -350,8 +409,13 @@ void Sprint::handleGameOverInput()
 		{
 			if(event.Key.Code == sf::Key::R)
 				restart();
+			
+			if(event.Key.Code == sf::Key::M)
+				return RETURN_MAIN;
 		}
 	}
+	
+	return CONTINUE;
 }
 
 void Sprint::render()
@@ -364,7 +428,7 @@ void Sprint::render()
 
 void Sprint::play()
 {
-	playMusic();
+	playMusic(sprintMusic);
 	
 	setCurrentGamePiece(createNewPiece());
 	setNextPiece(createNewPiece());
@@ -389,7 +453,8 @@ void Sprint::play()
 		if(getState() == PAUSED)
 		{
 			timer.pause();
-			handlePauseInput();
+			if(handlePauseInput() == RETURN_MAIN)
+				return;
 		}
 		else
 		{
@@ -403,7 +468,8 @@ void Sprint::play()
 			if(Game::gameOver() || finished())
 			{
 				timer.pause();
-				handleGameOverInput();
+				if(handleGameOverInput() == RETURN_MAIN)
+					return;
 			}
 			else
 				render();
